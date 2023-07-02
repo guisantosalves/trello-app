@@ -8,6 +8,8 @@ interface BoardState {
   getBoard: () => void;
   setBoardState: (board: Board) => void;
   updateTodoInDB: (todo: Todo, columnId: TypedColumn) => void;
+  searchString: string;
+  setSearchString: (searchString: string) => void;
 }
 
 export const useBoardStore = create<BoardState>((set) => ({
@@ -19,7 +21,7 @@ export const useBoardStore = create<BoardState>((set) => ({
     set({ board });
   },
   setBoardState: (board) => {
-    set({ board });
+    set({ board: board });
   },
   updateTodoInDB: async (todo: Todo, columnId: TypedColumn) => {
     await databases.updateDocument(
@@ -32,4 +34,7 @@ export const useBoardStore = create<BoardState>((set) => ({
       }
     );
   },
+  searchString: "",
+  setSearchString: (searchString: string) =>
+    set({ searchString: searchString }),
 }));
