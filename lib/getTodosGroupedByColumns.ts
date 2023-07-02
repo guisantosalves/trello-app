@@ -34,7 +34,7 @@ export const getTodosGroupedByColumns = async () => {
   }, new Map<TypedColumn, Column>());
 
   // if data does not have one of the columns add them with empty todos
-  const columnTypes: TypedColumn[] = ["done", "inprogress", "todo"];
+  const columnTypes: TypedColumn[] = ["todo", "inprogress", "done"];
   for (const columntype of columnTypes) {
     // if there is not inside the Map one of types
     if (!columns.get(columntype)) {

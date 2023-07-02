@@ -18,7 +18,7 @@ const idToColumnText: {
   done: "Done",
 };
 
-export default function Column({ id, todos, index }: Props) {
+export default function ColumnComponent({ id, todos, index }: Props) {
   return (
     <Draggable draggableId={id} index={index}>
       {(provided) => (

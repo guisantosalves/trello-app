@@ -1,3 +1,5 @@
+import { Models } from "appwrite";
+
 type Board = {
   columns: Map<TypedColumn, Column>;
 };
@@ -9,7 +11,7 @@ type Column = {
   todos: Todo[];
 };
 
-interface Todo {
+interface Todo extends Models.Document {
   $id: string;
   $createdAt: string;
   title: string;
