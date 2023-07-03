@@ -4,17 +4,36 @@ import Image from "next/image";
 import { MagnifyingGlassIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 import Avatar from "react-avatar";
 import { useBoardStore } from "@/store/BoardStore";
+import fetchSuggestion from "@/lib/fetchSuggestion";
 
 // md -> tag for medium screen
 export default function Header() {
-  const [searchString, setSearchString] = useBoardStore((state) => [
+  const [board, searchString, setSearchString] = useBoardStore((state) => [
+    state.board,
     state.searchString,
     state.setSearchString,
   ]);
+  const [loading, setLoading] = React.useState<boolean>(false);
+  const [suggesting, setSuggesting] = React.useState<string>("");
+
+  // React.useEffect(() => {
+  //   if (board.columns.size === 0) {
+  //     return;
+  //   }
+  //   setLoading(true);
+
+  //   const fetchSuggestionfunc = async () => {
+  //     const sugg = await fetchSuggestion(board);
+  //     setSuggesting(sugg);
+  //     setLoading(false);
+  //   };
+
+  //   fetchSuggestionfunc();
+  // }, [board]);
 
   return (
     <header>
-      <div className="flex flex-col md:flex-row items-center p-5 bg-gray-500/10 rounded-b-2xl">
+      <div className="flex flex-col md:flex-row items-center p-5 bg-gray-500/10 rounded-b-2xl mb-10 md:mb-10">
         <div
           className="
         absolute 
@@ -58,12 +77,16 @@ export default function Header() {
           <Avatar name="Guilherme Santos" round size="50" color="#0055d1" />
         </div>
       </div>
-      <div className="flex items-center justify-center px-5 py-5 md:py-5">
+      {/* <div className="flex items-center justify-center px-5">
         <p className="flex items-center p-5 text-sm font-light pr-5 shadow-xl rounded-xl w-fit bg-white italic max-w-3xl text-[#0055d1]">
-          <UserCircleIcon className="inline-block h-10 w-10 text-[#0055d1] mr-1" />
+          <UserCircleIcon
+            className={`inline-block h-10 w-10 text-[#0055d1] mr-1 ${
+              loading && "animate-spin"
+            }`}
+          />
           gpt is summarising your task for today...
         </p>
-      </div>
+      </div> */}
     </header>
   );
 }
