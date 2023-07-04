@@ -21,6 +21,7 @@ const idToColumnText: {
 
 export default function ColumnComponent({ id, todos, index }: Props) {
   const [searchString] = useBoardStore((state) => [state.searchString]);
+  const [showModal, setShowModal] = React.useState<boolean>(false);
   return (
     <Draggable draggableId={id} index={index}>
       {(provided) => (
